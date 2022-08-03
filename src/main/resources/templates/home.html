@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
 	<title>Spring Website</title>
 </head>
 <body>
-<h1>Welcome to our Spring Blog!</h1>
-
+	<h1>Welcome to our Spring Blog!</h1>
+	<div th:replace="fragment.html :: fragment"></div>
+	<div th:insert="fragment.html :: fragment"></div>
 </body>
 </html>
