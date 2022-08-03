@@ -9,9 +9,4 @@ public class HomeController {
 	public String welcomePage(){
 		return "home";
 	}
-
-
-
-
-
 }
