@@ -8,11 +8,14 @@
 
 <h2 th:text="${info}"></h2>
 
-<form action="/new-info" method="post">
-	<label for="info">Tell me a secret!</label>
-	<input type="text" name="info" id="info">
-	<button>Submit your secret!</button>
-</form>
+<div>
+	<a href="/roll-dice/1">Choose 1</a>
+	<a href="/roll-dice/2">Choose 2</a>
+	<a href="/roll-dice/3">Choose 3</a>
+	<a href="/roll-dice/4">Choose 4</a>
+	<a href="/roll-dice/5">Choose 5</a>
+	<a href="/roll-dice/6">Choose 6</a>
+</div>
 
 </body>
 </html>
