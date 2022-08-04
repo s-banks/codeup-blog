@@ -1,34 +1,41 @@
 package com.codeup.springblog.controllers;
 
+import com.codeup.springblog.models.Post;
+import com.codeup.springblog.repositories.PostRepository;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import javax.servlet.http.HttpServletRequest;
+
 
 @Controller
 public class PostController {
-	@RequestMapping(path = "/post", method = RequestMethod.GET)
-	@ResponseBody
-	public String index() {
-		return "<h1>post index page</h1>";
+	@RequestMapping(path = "/posts", method = RequestMethod.GET)
+	public String showAllPosts(Model model) {
+		model.addAttribute("posts", postsDao.findAll());
+		return "posts/index";
 	}
 
-	@RequestMapping(path = "/post/{id}", method = RequestMethod.GET)
-	@ResponseBody
-	public String postPage(@PathVariable int id) {
-		return String.format("Single post page for post#: %d", id);
+	@RequestMapping(path = "/posts/{id}", method = RequestMethod.GET)
+	public String postPage(@PathVariable Long id, Model model) {
+		model.addAttribute("singlePost", postsDao.getById(id));
+		return "/posts/show";
 	}
 
-	@RequestMapping(path = "/post/create", method = RequestMethod.GET)
-	@ResponseBody
-	public String hello() {return "<form action=\"/post/create\" method=\"post\"><label for=\"name\">Name:</label><br><input type=\"text\" id=\"name\" name=\"name\"><br><input type=\"submit\" value=\"Submit\">";}
+	@RequestMapping(path = "/posts/create", method = RequestMethod.GET)
+	public String createPost() {return "posts/create";}
 
 
-	@RequestMapping(path = "/post/create", method = RequestMethod.POST)
-	@ResponseBody
-	String handleRequest(HttpServletRequest request) {
-		String user = request.getParameter("name");
-		return String.format("<h1>You entered the name: %s</h1>", user);
+	@PostMapping(path = "/posts/create")
+	String createPost(HttpServletRequest request) {
+		String title = request.getParameter("title");
+		String body = request.getParameter("body");
+		postsDao.save(new Post(title, body));
+		return "redirect:/posts";
 	}
 
+	private final PostRepository postsDao;
+	public PostController(PostRepository postsDao) {
+		this.postsDao = postsDao;
+	}
 }

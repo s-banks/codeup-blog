@@ -5,7 +5,7 @@
 <nav th:replace="partials/fragment :: navbar"></nav>
 <main class="container">
 	<div th:each="post : ${posts}">
-		<h1 th:text="${post.title}"></h1>
+		<h2 th:text="${post.title}"></h2>
 		<p th:text="${post.body}"></p>
 	</div>
 </main>
