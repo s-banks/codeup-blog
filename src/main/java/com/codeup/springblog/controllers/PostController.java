@@ -2,13 +2,11 @@ package com.codeup.springblog.controllers;
 
 
 import com.codeup.springblog.models.Post;
-import com.codeup.springblog.models.User;
 import com.codeup.springblog.repositories.PostRepository;
 import com.codeup.springblog.repositories.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import javax.servlet.http.HttpServletRequest;
 
 
 @Controller
@@ -22,7 +20,6 @@ public class PostController {
 		this.usersDao = usersDao;
 	}
 
-
 	@RequestMapping(path = "/posts", method = RequestMethod.GET)
 	public String showAllPosts(Model model) {
 		model.addAttribute("posts", postsDao.findAll());
@@ -31,7 +28,7 @@ public class PostController {
 
 	@RequestMapping(path = "/posts/{id}", method = RequestMethod.GET)
 	public String postPage(@PathVariable Long id, Model model) {
-		model.addAttribute("singlePost", postsDao.getById(id));
+		model.addAttribute("post", postsDao.getById(id));
 		return "/posts/show";
 	}
 
@@ -41,12 +38,9 @@ public class PostController {
 		return "posts/create";
 	}
 
-
 	@PostMapping(path = "/posts/create")
 	String createPost(@RequestParam(name = "user") long id, @RequestParam(name = "title") String title, @RequestParam(name = "body") String body) {
-		Post newPost = new Post(title, body, usersDao.getById(id));
-		postsDao.save(newPost);
+		postsDao.save(new Post(title, body, usersDao.getById(id)));
 		return "redirect:/posts";
 	}
-
 }

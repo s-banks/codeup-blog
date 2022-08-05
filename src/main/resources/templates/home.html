@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-	<meta charset="UTF-8">
-	<title>Spring Website</title>
-</head>
+<head th:replace="partials/fragment :: head('Spring Website')"></head>
 <body>
+<nav th:insert="partials/fragment :: navbar"></nav>
 	<h1>Welcome to our Spring Blog!</h1>
 	<div th:replace="fragment.html :: fragment"></div>
 	<div th:insert="fragment.html :: fragment"></div>
+	<div><img th:src="@{~/img/il_logo.jpg}" alt="Illuminati Image" id="il_logo"></div>
+
+<div th:replace="partials/fragment :: footer"></div>
 </body>
 </html>

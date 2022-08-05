@@ -1,11 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-	<meta charset="UTF-8">
-	<title>Roll Dice</title>
-</head>
+<head th:replace="partials/fragment :: head('Roll Dice')"></head>
 <body>
-
+<nav th:replace="partials/fragment :: navbar"></nav>
 <h2 th:text="${info}"></h2>
 
 <div>
@@ -17,5 +14,6 @@
 	<a href="/roll-dice/6">Choose 6</a>
 </div>
 
+<nav th:replace="partials/fragment :: footer"></nav>
 </body>
 </html>

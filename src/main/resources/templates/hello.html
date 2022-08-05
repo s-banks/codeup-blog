@@ -1,15 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:fr="http://www.thymeleaf.org">
-<head>
-	<meta charset="UTF-8">
-	<title>Hello Page</title>
-
-</head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="partials/fragment :: head('Hello Page')"></head>
 <body>
-<nav fr:insert="/partials/navbar :: navbar"></nav>
+<nav th:insert="partials/fragment :: navbar"></nav>
 
-<h2>Hello, <span fr:text="${name}">World</span>!</h2>
+<h2>Hello, <span th:text="${name}">World</span>!</h2>
 
-
+<div th:replace="partials/fragment :: footer"></div>
 </body>
 </html>

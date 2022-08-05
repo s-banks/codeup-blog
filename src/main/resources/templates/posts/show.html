@@ -4,16 +4,20 @@
 <head th:replace="partials/fragment :: head('Viewing All Posts')"></head>
 <body>
 <nav th:replace="partials/fragment :: navbar"></nav>
-	<main class="container">
-		<div class="card" style="width: 18rem;">
-			<div class="card-body">
-				<h5 th:text="${singlePost.getTitle()}" class="card-title"></h5>
-				<p th:text="${singlePost.getBody()}" class="card-text"></p>
-				<p>Contact Information:
-					<span th:text="${singlePost.user.getEmail()}" class="card-text"></span>
-				</p>
-			</div>
+<main class="container">
+	<div class="card" style="width: 18rem;">
+		<div class="card-body">
+			<h5 th:text="${post.getTitle()}" class="card-title"></h5>
+			<p th:text="${post.getBody()}" class="card-text"></p>
+			<p>Contact Information:
+				<br>
+				User Name: <span th:if="${post.user != null}" th:text="${post.user.getUsername()}" class="card-text"></span>
+				<br>
+				Email Address: <span th:if="${post.user != null}" th:text="${post.user.getEmail()}" class="card-text"></span>
+			</p>
 		</div>
+	</div>
 </main>
+<div th:replace="partials/fragment :: footer"></div>
 </body>
 </html>

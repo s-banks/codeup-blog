@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Dogs</title>
-</head>
+<head th:replace="partials/fragment :: head('Dogs')"></head>
 <body>
+<nav th:insert="partials/fragment :: navbar"></nav>
 <div th:each = "dog : ${dogs}">
     <h1 th:text = "${dog.getName()}"></h1>
     <p th:text = "${dog.getBreed()}"></p>
@@ -13,5 +11,6 @@
 	</ul>
 	<br>
 </div>
+<div th:replace="partials/fragment :: footer"></div>
 </body>
 </html>
