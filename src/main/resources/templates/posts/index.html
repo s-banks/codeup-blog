@@ -5,8 +5,13 @@
 <nav th:replace="partials/fragment :: navbar"></nav>
 <main class="container">
 	<div th:each="post : ${posts}">
-		<h2 th:text="${post.title}"></h2>
-		<p th:text="${post.body}"></p>
+		<div class="card" style="width: 18rem;">
+			<div class="card-body">
+				<h5 th:text="${post.getTitle()}" class="card-title"></h5>
+				<p th:text="${post.getBody()}" class="card-text"></p>
+				<a th:href="@{/posts/{id}(id=${post.getId()})}" class="card-link">Card link</a>
+			</div>
+		</div>
 	</div>
 </main>
 </body>

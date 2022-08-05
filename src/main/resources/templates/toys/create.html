@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="partials/fragment :: head('Create A Posts')"></head>
+<body>
+<nav th:replace="partials/fragment :: navbar"></nav>
+<form action="/toys/create" method="post">
+    <label for="name">Name of Toy:</label>
+    <input type="text" id="name" name="name">
+    <br><br>
+    <select name="dog" id="dog">
+        <option th:each="dog: ${dogs}" th:text="${dog.name}" th:value="${dog.id}"></option>
+    </select>
+    <br><br>
+    <input type="submit" value="Submit">
+</form>
+</body>
+</html>
