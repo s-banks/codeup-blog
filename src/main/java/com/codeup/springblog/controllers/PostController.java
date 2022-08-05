@@ -1,7 +1,10 @@
 package com.codeup.springblog.controllers;
 
+
 import com.codeup.springblog.models.Post;
+import com.codeup.springblog.models.User;
 import com.codeup.springblog.repositories.PostRepository;
+import com.codeup.springblog.repositories.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +13,16 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class PostController {
+
+	private PostRepository postsDao;
+	private UserRepository usersDao;
+
+	public PostController(PostRepository postsDao, UserRepository usersDao) {
+		this.postsDao = postsDao;
+		this.usersDao = usersDao;
+	}
+
+
 	@RequestMapping(path = "/posts", method = RequestMethod.GET)
 	public String showAllPosts(Model model) {
 		model.addAttribute("posts", postsDao.findAll());
@@ -23,19 +36,17 @@ public class PostController {
 	}
 
 	@RequestMapping(path = "/posts/create", method = RequestMethod.GET)
-	public String createPost() {return "posts/create";}
+	public String createPost(Model model) {
+		model.addAttribute("users", usersDao.findAll());
+		return "posts/create";
+	}
 
 
 	@PostMapping(path = "/posts/create")
-	String createPost(HttpServletRequest request) {
-		String title = request.getParameter("title");
-		String body = request.getParameter("body");
-		postsDao.save(new Post(title, body));
+	String createPost(@RequestParam(name = "user") long id, @RequestParam(name = "title") String title, @RequestParam(name = "body") String body) {
+		Post newPost = new Post(title, body, usersDao.getById(id));
+		postsDao.save(newPost);
 		return "redirect:/posts";
 	}
 
-	private final PostRepository postsDao;
-	public PostController(PostRepository postsDao) {
-		this.postsDao = postsDao;
-	}
 }

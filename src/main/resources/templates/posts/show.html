@@ -9,6 +9,9 @@
 			<div class="card-body">
 				<h5 th:text="${singlePost.getTitle()}" class="card-title"></h5>
 				<p th:text="${singlePost.getBody()}" class="card-text"></p>
+				<p>Contact Information:
+					<span th:text="${singlePost.user.getEmail()}" class="card-text"></span>
+				</p>
 			</div>
 		</div>
 </main>

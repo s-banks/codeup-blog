@@ -11,6 +11,10 @@
 	<label for="body">Post Content</label>
 	<br>
 	<textarea rows="4" cols="50" id="body" name="body"></textarea>
+	<br>
+	<select name="user" id="user">
+		<option th:each="user: ${users}" th:text="${user.getUsername()}" th:value="${user.getId()}"></option>
+	</select>
 	<br><br>
 	<input type="submit" value="Submit">
 </form>
