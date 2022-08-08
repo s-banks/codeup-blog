@@ -3,6 +3,7 @@ package com.codeup.springblog.controllers;
 
 import com.codeup.springblog.models.Post;
 import com.codeup.springblog.repositories.PostRepository;
+import com.codeup.springblog.repositories.TagRepository;
 import com.codeup.springblog.repositories.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,10 +15,13 @@ public class PostController {
 
 	private PostRepository postsDao;
 	private UserRepository usersDao;
+	private TagRepository tagDao;
 
-	public PostController(PostRepository postsDao, UserRepository usersDao) {
+	public PostController(PostRepository postsDao, UserRepository usersDao, TagRepository tagDao) {
 		this.postsDao = postsDao;
 		this.usersDao = usersDao;
+		this.tagDao = tagDao;
+
 	}
 
 	@RequestMapping(path = "/posts", method = RequestMethod.GET)
@@ -35,12 +39,25 @@ public class PostController {
 	@RequestMapping(path = "/posts/create", method = RequestMethod.GET)
 	public String createPost(Model model) {
 		model.addAttribute("users", usersDao.findAll());
+		model.addAttribute("post", new Post());
 		return "posts/create";
 	}
 
 	@PostMapping(path = "/posts/create")
-	String createPost(@RequestParam(name = "user") long id, @RequestParam(name = "title") String title, @RequestParam(name = "body") String body) {
-		postsDao.save(new Post(title, body, usersDao.getById(id)));
+	String createPost(@ModelAttribute Post post) {
+		postsDao.save(post);
 		return "redirect:/posts";
 	}
+
+	@GetMapping("/posts/edit/{id}")
+	public String editProduct(Model model, @PathVariable long id) {
+		model.addAttribute("post", postsDao.getById(id));
+		return "posts/create";
+	}
+
+//	@RequestMapping(path = "/posts/{id}", method = RequestMethod.GET)
+//	public String tagPage(@PathVariable Long id, Model model) {
+//		model.addAttribute("tag", tagDao.getById(id));
+//		return "/posts/tag";
+//	}
 }

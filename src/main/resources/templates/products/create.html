@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="partials/fragment :: head('Create Products')"></head>
+<body>
+<nav th:replace="partials/fragment :: navbar"></nav>
+<form th:action="@{/products/create}" th:method="POST" th:object="${product}">
+    <label for="name">Name of Product:</label>
+    <input name="name" id="name" th:field="*{name}" />
+    <br />
+    <label for="price">Price of Product:</label>
+    <input name="price" id="price" th:field="*{price}"/>
+    <br />
+    <input type="hidden" th:field="*{id}" />
+    <input type="submit" />
+</form>
+
+<div th:replace="partials/fragment :: footer"></div>
+</body>
+</html>

@@ -3,20 +3,21 @@
 <head th:replace="partials/fragment :: head('Create A Posts')"></head>
 <body>
 <nav th:replace="partials/fragment :: navbar"></nav>
-<form action="/posts/create" method="post">
+<form th:action="@{/posts/create}" th:method="post" th:object="${post}">
 	<label for="title">Post Title:</label>
 	<br>
-	<input type="text" id="title" name="title">
+	<input type="text" id="title" name="title" th:field="*{title}">
 	<br><br>
 	<label for="body">Post Content</label>
 	<br>
-	<textarea rows="4" cols="50" id="body" name="body"></textarea>
+	<textarea rows="4" cols="50" id="body" name="body" th:field="*{body}"></textarea>
 	<br>
 	<label for="user">Select User</label>
 	<select name="user" id="user">
-		<option th:each="user: ${users}" th:text="${user.getUsername()}" th:value="${user.getId()}"></option>
+		<option th:each="user: ${users}" th:text="${user.getUsername()}" th:value="${user.getId()}" th:field="*{user}"></option>
 	</select>
 	<br><br>
+	<input type="hidden" th:field="*{id}" />
 	<input type="submit" value="Submit">
 </form>
 <div th:replace="partials/fragment :: footer"></div>

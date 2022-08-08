@@ -15,6 +15,7 @@
 				<br>
 				Email Address: <span th:if="${post.user != null}" th:text="${post.user.getEmail()}" class="card-text"></span>
 				<p><a th:href="@{/posts/{id}(id=${post.getId()})}" class="card-link">Open Post</a></p>
+				<p><a th:href="@{/posts/edit/{id}(id=${post.getId()})}" class="card-link">Edit Post</a></p>
 				</p>
 			</div>
 		</div>
