@@ -11,13 +11,7 @@
 	<label for="body">Post Content</label>
 	<br>
 	<textarea rows="4" cols="50" id="body" name="body" th:field="*{body}"></textarea>
-	<br>
-	<label for="user">Select User</label>
-	<select name="user" id="user">
-		<option th:each="user: ${users}" th:text="${user.getUsername()}" th:value="${user.getId()}" th:field="*{user}"></option>
-	</select>
 	<br><br>
-	<input type="hidden" th:field="*{id}" />
 	<input type="submit" value="Submit">
 </form>
 <div th:replace="partials/fragment :: footer"></div>

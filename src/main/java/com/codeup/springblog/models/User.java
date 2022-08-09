@@ -10,13 +10,13 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
-	@Column(length = 50, nullable = false)
+	@Column(length = 100, nullable = false)
 	private String username;
 
-	@Column(length = 50, nullable = false)
+	@Column(nullable = false)
 	private String email;
 
-	@Column(length = 50, nullable = false)
+	@Column(length = 100, nullable = false)
 	private String password;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
@@ -31,6 +31,13 @@ public class User {
 		this.email = email;
 		this.password = password;
 		this.posts = posts;
+	}
+
+	public User(User copy) {
+		this.id = copy.id;
+		this.username = copy.username;
+		this.email = copy.email;
+		this.password = copy.password;
 	}
 
 	public User(String username, String email, String password, List<Post> posts) {

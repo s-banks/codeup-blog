@@ -32,9 +32,16 @@
 				<li class="nav-item">
 					<a class="nav-link" href="/dogs">View Dogs</a>
 				</li>
-				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="/toys/create">Add Dog Toys</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/login">Login</a>
+				</li>
+				<li>
+					<form th:action="@{/logout}" th:method="post">
+						<button class="btn-link btn">Logout</button>
+					</form>
 				</li>
 			</ul>
 		</div>

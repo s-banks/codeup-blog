@@ -3,7 +3,7 @@
 <head th:replace="partials/fragment :: head('Viewing All Posts')"></head>
 <body>
 <nav th:replace="partials/fragment :: navbar"></nav>
-<main class="container">
+<main class="container grid-container">
 	<div th:each="post : ${posts}">
 		<div class="card" style="width: 18rem;">
 			<div class="card-body">
