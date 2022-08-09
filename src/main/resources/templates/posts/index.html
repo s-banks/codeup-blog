@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="partials/fragment :: head('Viewing All Posts')"></head>
 <body>
 <nav th:replace="partials/fragment :: navbar"></nav>
@@ -15,7 +15,9 @@
 				<br>
 				Email Address: <span th:if="${post.user != null}" th:text="${post.user.getEmail()}" class="card-text"></span>
 				<p><a th:href="@{/posts/{id}(id=${post.getId()})}" class="card-link">Open Post</a></p>
+				<th:block sec:authorize="isAuthenticated()">
 				<p><a th:href="@{/posts/edit/{id}(id=${post.getId()})}" class="card-link">Edit Post</a></p>
+				</th:block>
 				</p>
 			</div>
 		</div>

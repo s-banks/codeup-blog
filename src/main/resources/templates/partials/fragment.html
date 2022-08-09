@@ -1,4 +1,4 @@
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:fragment="head(title)">
 	<meta charset="UTF-8">
 	<title th:text="${title}"></title>
@@ -23,26 +23,34 @@
 				<li class="nav-item">
 					<a class="nav-link" aria-current="page" href="/posts">View Posts</a>
 				</li>
+				<th:block sec:authorize="isAuthenticated()">
 				<li class="nav-item">
 					<a class="nav-link" aria-current="page" href="/posts/create">Create Posts</a>
 				</li>
+				</th:block>
 				<li class="nav-item">
 					<a class="nav-link" href="/products">View Products</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="/dogs">View Dogs</a>
 				</li>
+				<th:block sec:authorize="isAuthenticated()">
 				<li class="nav-item">
 					<a class="nav-link" href="/toys/create">Add Dog Toys</a>
 				</li>
+				</th:block>
+				<th:block sec:authorize="!isAuthenticated()">
 				<li class="nav-item">
 					<a class="nav-link" href="/login">Login</a>
 				</li>
+				</th:block>
+				<th:block sec:authorize="isAuthenticated()">
 				<li>
 					<form th:action="@{/logout}" th:method="post">
 						<button class="btn-link btn">Logout</button>
 					</form>
 				</li>
+				</th:block>
 			</ul>
 		</div>
 	</div>

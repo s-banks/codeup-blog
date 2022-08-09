@@ -48,7 +48,7 @@ public class PostController {
 			model.addAttribute("post", new Post());
 			return "posts/create";
 		} else {
-			return "login";
+			return "redirect:/login";
 		}
 	}
 
@@ -63,9 +63,12 @@ public class PostController {
 
 	@GetMapping("/posts/edit/{id}")
 	public String editProduct(Model model, @PathVariable long id) {
-		model.addAttribute("users", usersDao.findAll());
-		model.addAttribute("post", postsDao.getById(id));
-		return "posts/create";
+		User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if (currentUser.getId() == postsDao.getById(id).getUser().getId()) {
+			model.addAttribute("post", postsDao.getById(id));
+			return "posts/create";
+		} else{
+			return "redirect:/login";
+		}
 	}
-
 }
